@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прайс-лист MathTutor</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--tg-theme-bg-color, #ffffff);
+            color: var(--tg-theme-text-color, #000000);
+            margin: 0;
+            padding: 20px;
+        }
+        .container { max-width: 600px; margin: 0 auto; }
+        .card {
+            background-color: var(--tg-theme-secondary-bg-color, #f0f0f0);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .card h3 { margin: 0 0 10px 0; font-size: 18px; }
+        .price {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--tg-theme-button-color, #3390ec);
+        }
+        .desc {
+            font-size: 14px;
+            color: var(--tg-theme-hint-color, #888888);
+            margin-top: 5px;
+            line-height: 1.5;
+        }
+        .offer-link {
+            display: block; text-align: center; margin-top: 30px;
+            color: var(--tg-theme-link-color, #3390ec);
+            text-decoration: none; font-size: 14px;
+        }
+        .btn-main {
+            display: block; width: 100%; padding: 15px; margin-top: 20px;
+            background-color: var(--tg-theme-button-color, #3390ec);
+            color: var(--tg-theme-button-text-color, #ffffff);
+            text-align: center; border-radius: 10px;
+            font-weight: bold; cursor: pointer; border: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 style="text-align:center; font-size: 20px;">🎓 Навчальні Програми</h1>
+
+    <div class="card">
+        <h3>🏫 Шкільна математика</h3>
+        <div class="price">550 грн / урок</div>
+        <div class="desc">Допомога з домашнім, підтягування тем, контрольні. (60 хв)</div>
+    </div>
+
+    <div class="card">
+        <h3>🎓 Підготовка до НМТ</h3>
+        <div class="price">550 грн / урок</div>
+        <div class="desc">Інтенсивна підготовка до вступу. Тести, стратегії. (60 хв)</div>
+    </div>
+
+    <div class="card">
+        <h3>📦 Пакети занять</h3>
+        <div class="desc">
+            🔹 4 заняття — <b>2 200 грн</b><br>
+            🔥 8 занять — <b>4 000 грн</b> (Знижка 10%)<br>
+            💎 16 занять — <b>7 040 грн</b> (Знижка 20%)
+        </div>
+    </div>
+
+    <a href="https://docs.google.com/document/d/your-offer-link" class="offer-link">
+        📜 Читати Публічну Оферту
+    </a>
+
+    <button class="btn-main" onclick="Telegram.WebApp.close()">Закрити</button>
+</div>
+
+<script>
+    Telegram.WebApp.ready();
+    Telegram.WebApp.expand();
+</script>
+
+</body>
+</html>

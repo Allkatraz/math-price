@@ -6,59 +6,104 @@
     <title>MathTutor - Про школу</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
+        /* 🎨 НОВА ПАЛІТРА КОЛЬОРІВ (під папір) */
+        :root {
+            --bg-paper: #f9f6f0;         /* Основний фон (світлий папір) */
+            --bg-card: #efebdc;          /* Фон карток (темніший папір/нотатки) */
+            --text-dark: #2b2b2b;        /* Темно-сірий текст (не чисто чорний) */
+            --text-hint: #666055;        /* Колір підказок */
+            --accent-yellow: #e6c86e;    /* Жовтий акцент (для кнопок і заголовків) */
+            --accent-dark: #a88e45;      /* Темніший жовтий для посилань */
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--tg-theme-bg-color, #ffffff);
-            color: var(--tg-theme-text-color, #000000);
+            font-family: 'Comic Sans MS', 'Segoe UI Print', 'Bradley Hand', sans-serif; /* Шрифт під рукописний (якщо є в системі) */
+            background-color: var(--bg-paper);
+            color: var(--text-dark);
             margin: 0;
             padding: 20px;
             line-height: 1.6;
+            /* Додаємо легку текстуру паперу (опціонально) */
+            background-image: linear-gradient(to bottom, rgba(255,255,255,0.5), rgba(255,255,255,0.2));
         }
         .container { max-width: 600px; margin: 0 auto; }
         
-        h1 { text-align: center; margin-bottom: 20px; font-size: 24px; }
-        h2 { font-size: 18px; margin-top: 30px; margin-bottom: 15px; border-left: 4px solid var(--tg-theme-button-color, #3390ec); padding-left: 10px; }
+        /* Стилі для шапки з лого */
+        .profile-header { 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+            margin-bottom: 30px; 
+            padding-bottom: 15px;
+            border-bottom: 2px dashed var(--accent-yellow); /* Пунктирна лінія під шапкою */
+        }
+        .logo {
+            width: 70px;  /* Розмір логотипа */
+            height: 70px;
+            object-fit: contain; /* Щоб не розтягувався */
+            /* border-radius: 50%;  <-- Розкоментуй, якщо хочеш круглий логотип */
+        }
+        .profile-info h3 { margin: 0; font-size: 22px; color: var(--text-dark); }
+        .profile-info p { margin: 5px 0 0; opacity: 0.8; font-size: 14px; }
+
+        h2 { 
+            font-size: 20px; 
+            margin-top: 30px; 
+            margin-bottom: 15px; 
+            /* Стиль заголовка як на фото (підкреслення маркером) */
+            background-color: var(--accent-yellow);
+            display: inline-block;
+            padding: 2px 10px;
+            transform: rotate(-1deg); /* Легкий нахил для стилю */
+            border-radius: 4px;
+        }
 
         .card {
-            background-color: var(--tg-theme-secondary-bg-color, #f0f0f0);
+            background-color: var(--bg-card);
             border-radius: 12px;
             padding: 15px;
             margin-bottom: 15px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            box-shadow: 3px 3px 0px rgba(0,0,0,0.1); /* Жорстка тінь для ефекту наліпки */
+            border: 1px solid #dcd5c5; /* Легкий контур */
         }
-        .card h3 { margin: 0 0 5px 0; font-size: 17px; }
+        .card h3 { margin: 0 0 5px 0; font-size: 18px; }
         
         .price {
             font-size: 20px;
             font-weight: bold;
-            color: var(--tg-theme-button-color, #3390ec);
+            color: var(--text-dark); /* Ціна тепер темна, щоб виділятися на фоні */
             margin-top: 5px;
+            background-color: rgba(230, 200, 110, 0.3); /* Легкий жовтий фон для ціни */
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
         }
-        .desc { font-size: 14px; color: var(--tg-theme-hint-color, #555); }
+        .desc { font-size: 14px; color: var(--text-hint); }
         
         .feature-list { list-style: none; padding: 0; margin: 0; }
         .feature-list li { margin-bottom: 10px; padding-left: 25px; position: relative; font-size: 15px;}
         .feature-list li::before {
-            content: '✅'; position: absolute; left: 0; top: 0; font-size: 14px;
+            content: '✔️'; position: absolute; left: 0; top: 0; font-size: 14px; color: var(--text-dark);
         }
 
         .offer-link {
             display: block; text-align: center; margin-top: 30px;
-            color: var(--tg-theme-link-color, #3390ec);
-            text-decoration: underline; font-size: 14px;
+            color: var(--accent-dark);
+            text-decoration: underline; font-size: 14px; font-weight: bold;
         }
         .btn-main {
             display: block; width: 100%; padding: 15px; margin-top: 20px;
-            background-color: var(--tg-theme-button-color, #3390ec);
-            color: var(--tg-theme-button-text-color, #ffffff);
+            background-color: var(--accent-yellow);
+            color: var(--text-dark); /* Темний текст на жовтій кнопці */
             text-align: center; border-radius: 10px;
             font-weight: bold; cursor: pointer; border: none; font-size: 16px;
+            box-shadow: 3px 3px 0px rgba(0,0,0,0.1); /* Тінь для кнопки */
+            transition: all 0.1s ease;
         }
-        
-        /* Аватарка (якщо захочеш додати фото) */
-        .profile-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
-        .profile-info h3 { margin: 0; font-size: 20px; }
-        .profile-info p { margin: 5px 0 0; opacity: 0.8; font-size: 14px; }
+        .btn-main:active {
+            transform: translate(2px, 2px); /* Ефект натискання */
+            box-shadow: 1px 1px 0px rgba(0,0,0,0.1);
+        }
     </style>
 </head>
 <body>
@@ -66,22 +111,23 @@
 <div class="container">
     
     <div class="profile-header">
+        <img src="logo.png" alt="Логотип видри" class="logo">
         <div class="profile-info">
             <h3>MathTutor</h3>
-            <p>Сучасна школа математики</p>
+            <p>Затишна школа математики</p>
         </div>
     </div>
 
     <div class="card">
         <h3>👋 Чому обирають нас?</h3>
         <p class="desc" style="margin-bottom: 10px;">
-            Ми не просто "зубримо" формули. Ми вчимо розуміти логіку математики, щоб вона перестала бути страшною.
+            Ми не просто "зубримо" формули. Ми вчимо розуміти логіку математики в комфортній атмосфері.
         </p>
         <ul class="feature-list">
             <li><b>Індивідуальний підхід:</b> Програма підлаштовується під темп учня.</li>
             <li><b>Сучасні інструменти:</b> Графічний планшет, інтерактивна дошка, записи занять.</li>
             <li><b>Зворотний зв'язок:</b> Батьки завжди в курсі прогресу.</li>
-            <li><b>Результат:</b> Успішна здача НМТ, ДПА та покращення шкільних оцінок.</li>
+            <li><b>Результат:</b> Успішна здача НМТ, ДПА та покращення оцінок.</li>
         </ul>
     </div>
 
@@ -117,11 +163,9 @@
 
 <script>
     Telegram.WebApp.ready();
-    Telegram.WebApp.expand(); // Розгортаємо на весь екран
-    
-    // Адаптація кольорів під тему телефону (темна/світла)
-    document.body.style.backgroundColor = Telegram.WebApp.themeParams.bg_color;
-    document.body.style.color = Telegram.WebApp.themeParams.text_color;
+    Telegram.WebApp.expand();
+    // Ми вимкнули адаптацію під тему Телеграм, 
+    // щоб зберегти твій унікальний "паперовий" стиль.
 </script>
 
 </body>
